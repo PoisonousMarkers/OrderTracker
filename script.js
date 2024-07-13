@@ -19,7 +19,6 @@ function selectTable(tableNumber) {
     showMenu();
     updateOrderSummary();
     updateTableButtonColor(currentTable);
-    updateClearTableButtonVisibility(); // Update clear table button visibility
 }
 
 function addMenuItem(menuItem) {
@@ -41,7 +40,6 @@ function addMenuItem(menuItem) {
 
         updateOrderSummary();
         updateTableButtonColor(currentTable);
-        updateClearTableButtonVisibility(); // Update clear table button visibility
         saveOrdersToLocalStorage();
     } else {
         alert('Please select a table first.');
@@ -68,7 +66,6 @@ function removeMenuItem(itemIndex) {
         
         updateOrderSummary();
         updateTableButtonColor(currentTable);
-        updateClearTableButtonVisibility(); // Update clear table button visibility
         saveOrdersToLocalStorage();
     }
 }
@@ -104,8 +101,8 @@ function submitOrder() {
         orders[currentTable].forEach(order => order.submitted = true);
         updateOrderSummary();
         updateTableButtonColor(currentTable);
-        updateClearTableButtonVisibility(); // Update clear table button visibility
         saveOrdersToLocalStorage();
+        document.getElementById('clearTableBtn').style.display = 'inline-block'; // Show clear table button
         alert('Order submitted!');
         // Navigate back to table selection
         showTables();
@@ -120,8 +117,8 @@ function clearTable() {
             orders[currentTable] = [];
             updateOrderSummary();
             updateTableButtonColor(currentTable);
-            updateClearTableButtonVisibility(); // Update clear table button visibility
             saveOrdersToLocalStorage();
+            document.getElementById('clearTableBtn').style.display = 'none'; // Hide clear table button after clearing
             showTables(); // Navigate back to table selection screen
         }
     }
@@ -135,21 +132,6 @@ function updateTableButtonColor(tableNumber) {
         tableButton.classList.remove('submitted');
     }
 }
-
-// Function to update clear table button visibility
-function updateClearTableButtonVisibility() {
-    const clearTableBtn = document.getElementById('clearTableBtn');
-    if (currentTable !== null && orders[currentTable] && orders[currentTable].length > 0) {
-        clearTableBtn.style.display = 'inline-block'; // Show clear table button
-    } else {
-        clearTableBtn.style.display = 'none'; // Hide clear table button
-    }
-}
-
-// Load stored orders on page load
-window.onload = function() {
-    updateOrderSummary(); // Update summary based on stored orders
-};
 
 // Show tables by default
 showTables();
