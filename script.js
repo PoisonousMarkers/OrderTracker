@@ -13,10 +13,21 @@ function saveOrdersToLocalStorage() {
 
 function selectTable(tableNumber) {
     currentTable = tableNumber;
+
+    // Check if there are existing orders for the selected table
+    if (orders[currentTable] && orders[currentTable].length > 0) {
+        // If orders exist, show the menu directly
+        showMenu();
+    } else {
+        // If no orders exist, just update the currentTable and show tables
+        showTables();
+    }
+
+    // Initialize orders if it doesn't exist for the selected table
     if (!orders[currentTable]) {
         orders[currentTable] = [];
     }
-    showMenu();
+
     updateOrderSummary();
     updateTableButtonColor(currentTable);
 }
