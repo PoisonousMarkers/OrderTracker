@@ -1,0 +1,54 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+h1, h2 {
+    color: #333;
+}
+button {
+    padding: 10px 20px; /* Adjust padding as needed */
+    margin: 5px; /* Adjust margin as needed */
+    font-size: 16px; /* Adjust font size as needed */
+    border: none;
+    cursor: pointer;
+}
+#order-summary {
+    margin-top: 20px;
+}
+.submitted {
+    background-color: #e0e0e0; /* Change to desired color */
+}
+#menu-categories button{
+    width: 150px; /* Set fixed width for consistent size */
+    height: 60px; /* Set fixed height for consistent size */
+}
+#menu-categories button.active {
+    background-color: #4CAF50; /* Green background color */
+    color: white; /* White text color */
+}
+button.submitted {
+    background-color: #4CAF50; /* Green background color */
+    color: white; /* White text color */
+}
+.order-item.submitted {
+    background-color: #4CAF50; /* Green background color */
+    color: white; /* White text color */
+}
+/* Table button styles */
+.table-button {
+    width: 120px; /* Set fixed width for consistent size */
+    height: 80px; /* Set fixed height for consistent size */
+    background-color: #9e9e9e; /* White background */
+    color: #000000; /* Black text */
+}
+.menu-category-buttons button{
+    width: 170px; /* Set fixed width for consistent size */
+    height: 90px; /* Set fixed height for consistent size */
+    display: inline-block;
+    text-align: center;
+    white-space: normal; /* Allow text to wrap onto multiple lines */
+    min-height: 90px; /* Set minimum height to prevent height changes */
+    box-sizing: border-box; /* Ensure padding and border are included in the width */
+    line-height: 1.4; /* Adjust line height as needed for spacing */
+
+}
