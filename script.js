@@ -39,6 +39,8 @@ function addMenuItem(menuItem) {
 
         updateOrderSummary();
         updateTableButtonColor(currentTable);
+        updateClearTableButtonVisibility(); // Update clear table button visibility
+        saveOrdersToLocalStorage();
     } else {
         alert('Please select a table first.');
     }
@@ -61,6 +63,8 @@ function removeMenuItem(itemIndex) {
         
         updateOrderSummary();
         updateTableButtonColor(currentTable);
+        updateClearTableButtonVisibility(); // Update clear table button visibility
+        saveOrdersToLocalStorage();
     }
 }
 
@@ -118,6 +122,8 @@ function submitOrder() {
         orders[currentTable].forEach(order => order.submitted = true);
         updateOrderSummary();
         updateTableButtonColor(currentTable);
+        updateClearTableButtonVisibility(); // Update clear table button visibility
+        saveOrdersToLocalStorage();
         document.getElementById('clearTableBtn').style.display = 'inline-block'; // Show clear table button
         alert('Order submitted!');
         // Navigate back to table selection
@@ -133,7 +139,8 @@ function clearTable() {
             orders[currentTable] = [];
             updateOrderSummary();
             updateTableButtonColor(currentTable);
-            document.getElementById('clearTableBtn').style.display = 'none'; // Hide clear table button after clearing
+            updateClearTableButtonVisibility(); // Update clear table button visibility
+            saveOrdersToLocalStorage();
             showTables(); // Navigate back to table selection screen
         }
     }
