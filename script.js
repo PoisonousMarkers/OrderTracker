@@ -166,30 +166,10 @@ function updateClearTableButtonVisibility() {
     }
 }
 
-function autoEnterFullscreen() {
-    // Check if the app is launched from the home screen on iPad
-    if (navigator.standalone) {
-        enterFullscreen();
-    }
-}
-
-// Fullscreen function
-function enterFullscreen() {
-    if (document.documentElement.requestFullscreen) {
-        document.documentElement.requestFullscreen();
-    } else if (document.documentElement.webkitRequestFullscreen) { /* Safari */
-        document.documentElement.webkitRequestFullscreen();
-    } else if (document.documentElement.msRequestFullscreen) { /* IE11 */
-        document.documentElement.msRequestFullscreen();
-    }
-}
-
 // Load stored orders on page load
 window.onload = function() {
     updateOrderSummary(); // Update summary based on stored orders
 };
 
-// Automatically enter fullscreen on page load if launched from home screen on iPad
-autoEnterFullscreen();
 // Show tables by default
 showTables();
