@@ -52,8 +52,12 @@ function removeMenuItem(itemIndex) {
             if (!confirm('This item has been submitted. Are you sure you want to remove it?')) {
                 return;
             }
+        } else {
+            if (!confirm('Are you sure you want to remove this item?')) {
+                return;
+            }
         }
-        
+
         if (orders[currentTable][itemIndex].quantity > 1) {
             orders[currentTable][itemIndex].quantity--;
         } else {
