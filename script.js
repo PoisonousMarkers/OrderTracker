@@ -177,6 +177,11 @@ function enterFullscreen() {
     }
 }
 
+// Load stored orders on page load
+window.onload = function() {
+    updateOrderSummary(); // Update summary based on stored orders
+};
+
 // Automatically enter fullscreen on page load if launched from home screen on iPad
 autoEnterFullscreen();
 // Show tables by default
