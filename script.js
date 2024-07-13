@@ -147,7 +147,16 @@ function updateTableButtonColor(tableNumber) {
         tableButton.classList.remove('submitted');
     }
 
-}function enterFullscreen() {
+}
+function autoEnterFullscreen() {
+    // Check if the app is launched from the home screen on iPad
+    if (navigator.standalone) {
+        enterFullscreen();
+    }
+}
+
+// Fullscreen function
+function enterFullscreen() {
     if (document.documentElement.requestFullscreen) {
         document.documentElement.requestFullscreen();
     } else if (document.documentElement.webkitRequestFullscreen) { /* Safari */
@@ -157,7 +166,7 @@ function updateTableButtonColor(tableNumber) {
     }
 }
 
-// Automatically enter fullscreen on page load if on mobile
+// Automatically enter fullscreen on page load if launched from home screen on iPad
 autoEnterFullscreen();
 // Show tables by default
 showTables();
