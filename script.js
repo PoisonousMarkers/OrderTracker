@@ -146,7 +146,18 @@ function updateTableButtonColor(tableNumber) {
     } else {
         tableButton.classList.remove('submitted');
     }
+
+}function enterFullscreen() {
+    if (document.documentElement.requestFullscreen) {
+        document.documentElement.requestFullscreen();
+    } else if (document.documentElement.webkitRequestFullscreen) { /* Safari */
+        document.documentElement.webkitRequestFullscreen();
+    } else if (document.documentElement.msRequestFullscreen) { /* IE11 */
+        document.documentElement.msRequestFullscreen();
+    }
 }
 
+// Automatically enter fullscreen on page load if on mobile
+autoEnterFullscreen();
 // Show tables by default
 showTables();
