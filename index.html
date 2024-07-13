@@ -47,12 +47,13 @@
     
         <div class="menu-category-buttons">
             <!-- Starters Menu Items -->
-            <div id="menu-categories">
-                <button onclick="showCategory('starters')" ontouchstart="showCategory('starters')" data-category="starters">Starters</button>
-                <button onclick="showCategory('pasta')" ontouchstart="showCategory('pasta')" data-category="pasta">Pasta</button>
-                <button onclick="showCategory('pizza')" ontouchstart="showCategory('pizza')" data-category="pizza">Pizza</button>
-                <button onclick="showCategory('desserts')" ontouchstart="showCategory('desserts')" data-category="desserts">Desserts</button>
-                <button onclick="showCategory('modifiers')" ontouchstart="showCategory('modifiers')" data-category="modifiers">Modifiers</button>
+            <div id="menu-items-starters" style="display: none;">
+                <button onclick="addMenuItem('Bruschetta')">Bruschetta</button>
+                <button onclick="addMenuItem('Caesar Salad')">CaesarSalad</button>
+                <button onclick="addMenuItem('Caprese Salad')">CapreseSalad</button>
+                <button onclick="addMenuItem('Tomato Soup')">TomatoSoup</button>
+                <button onclick="addMenuItem('Mushroom Soup')">MushroomSoup</button>
+                <!-- Add more items as needed -->
             </div>
         
             <!-- Pasta Menu Items -->
