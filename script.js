@@ -21,6 +21,30 @@ function selectTable(tableNumber) {
     updateTableButtonColor(currentTable);
 }
 
+function showCategory(category) {
+    // Hide all menu items divs first
+    const menuItems = document.querySelectorAll('.menu-items');
+    menuItems.forEach(item => {
+        item.style.display = 'none';
+    });
+
+    // Show the selected category menu items
+    const selectedCategory = document.getElementById(`menu-items-${category}`);
+    if (selectedCategory) {
+        selectedCategory.style.display = 'block';
+    }
+
+    // Toggle active class for menu category buttons
+    const categoryButtons = document.querySelectorAll('#menu-categories button');
+    categoryButtons.forEach(button => {
+        if (button.getAttribute('data-category') === category) {
+            button.classList.add('active');
+        } else {
+            button.classList.remove('active');
+        }
+    });
+}
+
 function addMenuItem(menuItem) {
     if (currentTable !== null) {
         let found = false;
