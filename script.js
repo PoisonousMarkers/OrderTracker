@@ -14,18 +14,16 @@ function saveOrdersToLocalStorage() {
 function selectTable(tableNumber) {
     currentTable = tableNumber;
 
-    // Check if there are existing orders for the selected table
-    if (orders[currentTable] && orders[currentTable].length > 0) {
-        // If orders exist, show the menu directly
-        showMenu();
-    } else {
-        // If no orders exist, just update the currentTable and show tables
-        showTables();
-    }
-
     // Initialize orders if it doesn't exist for the selected table
     if (!orders[currentTable]) {
         orders[currentTable] = [];
+    }
+
+    // Show menu or tables based on whether there are existing orders
+    if (orders[currentTable] && orders[currentTable].length > 0) {
+        showMenu();
+    } else {
+        showTables();
     }
 
     updateOrderSummary();
@@ -144,8 +142,32 @@ function updateTableButtonColor(tableNumber) {
 
 // Load stored orders on page load
 window.onload = function() {
+    // Update table button colors based on stored orders
+    Object.keys(orders).forEach(tableNumber => {
+        updateTableButtonColor(tableNumber);
+    });
+
     updateOrderSummary(); // Update summary based on stored orders
 };
 
-// Show tables by default
-showTables();
+// Automatically enter fullscreen on page load if launched from home screen on iPad
+function autoEnterFullscreen() {
+    // Check if the app is launched from the home screen on iPad
+    if (navigator.standalone) {
+        enterFullscreen();
+    }
+}
+
+// Fullscreen function
+function enterFullscreen() {
+    if (document.documentElement.requestFullscreen) {
+        document.documentElement.requestFullscreen();
+    } else if (document.documentElement.webkitRequestFullscreen) { /* Safari */
+        document.documentElement.webkitRequestFullscreen();
+    } else if (document.documentElement.msRequestFullscreen) { /* IE11 */
+        document.documentElement.msRequestFullscreen();
+    }
+}
+
+// Call autoEnterFullscreen to check if fullscreen should be entered
+autoEnterFullscreen();
