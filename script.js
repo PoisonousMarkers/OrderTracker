@@ -148,6 +148,17 @@ function updateTableButtonColor(tableNumber) {
     }
 
 }
+
+// Function to update clear table button visibility
+function updateClearTableButtonVisibility() {
+    const clearTableBtn = document.getElementById('clearTableBtn');
+    if (currentTable !== null && orders[currentTable] && orders[currentTable].length > 0) {
+        clearTableBtn.style.display = 'inline-block'; // Show clear table button
+    } else {
+        clearTableBtn.style.display = 'none'; // Hide clear table button
+    }
+}
+
 function autoEnterFullscreen() {
     // Check if the app is launched from the home screen on iPad
     if (navigator.standalone) {
