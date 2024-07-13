@@ -76,9 +76,9 @@ function updateOrderSummary() {
         summary.innerHTML = `Table ${currentTable}:<br>`;
         orders[currentTable].forEach((order, index) => {
             if (order.quantity > 1) {
-                summary.innerHTML += `<button class="order-item ${order.submitted ? 'submitted' : ''}" ontouchstart="removeMenuItem(${index})">${order.item} (${order.quantity})</button><br>`;
+                summary.innerHTML += `<button class="order-item ${order.submitted ? 'submitted' : ''}" onclick="removeMenuItem(${index})">${order.item} (${order.quantity})</button><br>`;
             } else {
-                summary.innerHTML += `<button class="order-item ${order.submitted ? 'submitted' : ''}" ontouchstart="removeMenuItem(${index})">${order.item}</button><br>`;
+                summary.innerHTML += `<button class="order-item ${order.submitted ? 'submitted' : ''}" onclick="removeMenuItem(${index})">${order.item}</button><br>`;
             }
         });
     }
