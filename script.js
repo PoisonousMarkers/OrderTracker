@@ -19,16 +19,18 @@ function selectTable(tableNumber) {
     showMenu();
     updateOrderSummary();
     updateTableButtonColor(currentTable);
+    updateClearTableButtonVisibility(); // Update clear table button visibility
 }
 
 function addMenuItem(menuItem) {
     if (currentTable !== null) {
-        // Check if the item is already in the order
         let found = false;
+
+        // Check if the item is already in the order
         orders[currentTable].forEach(order => {
             if (order.item === menuItem) {
-                order.quantity++;
                 found = true;
+                order.quantity++; // Increment quantity if item already exists
             }
         });
 
@@ -46,15 +48,18 @@ function addMenuItem(menuItem) {
     }
 }
 
-
 function removeMenuItem(itemIndex) {
     if (currentTable !== null) {
         if (orders[currentTable][itemIndex].submitted) {
             if (!confirm('This item has been submitted. Are you sure you want to remove it?')) {
                 return;
             }
+        } else {
+            if (!confirm('Are you sure you want to remove this item?')) {
+                return;
+            }
         }
-        
+
         if (orders[currentTable][itemIndex].quantity > 1) {
             orders[currentTable][itemIndex].quantity--;
         } else {
@@ -68,16 +73,15 @@ function removeMenuItem(itemIndex) {
     }
 }
 
-
 function updateOrderSummary() {
     const summary = document.getElementById('summary');
     if (currentTable !== null) {
         summary.innerHTML = `Table ${currentTable}:<br>`;
         orders[currentTable].forEach((order, index) => {
             if (order.quantity > 1) {
-                summary.innerHTML += `<button class="order-item ${order.submitted ? 'submitted' : ''}" ontouchstart="removeMenuItem(${index})">${order.item} (${order.quantity})</button><br>`;
+                summary.innerHTML += `<button class="order-item ${order.submitted ? 'submitted' : ''}" onclick="removeMenuItem(${index})">${order.item} (${order.quantity})</button><br>`;
             } else {
-                summary.innerHTML += `<button class="order-item ${order.submitted ? 'submitted' : ''}" ontouchstart="removeMenuItem(${index})">${order.item}</button><br>`;
+                summary.innerHTML += `<button class="order-item ${order.submitted ? 'submitted' : ''}" onclick="removeMenuItem(${index})">${order.item}</button><br>`;
             }
         });
     }
@@ -94,28 +98,6 @@ function showMenu() {
     document.getElementById('page-menu').style.display = 'block';
 }
 
-function showCategory(category) {
-    // Hide all menu items divs first
-    document.getElementById('menu-items-starters').style.display = 'none';
-    document.getElementById('menu-items-pasta').style.display = 'none';
-    document.getElementById('menu-items-pizza').style.display = 'none';
-    document.getElementById('menu-items-desserts').style.display = 'none';
-    document.getElementById('menu-items-modifiers').style.display = 'none';
-
-    // Show the selected category menu items
-    document.getElementById(`menu-items-${category}`).style.display = 'block';
-
-    // Toggle active class for menu category buttons
-    const categoryButtons = document.querySelectorAll('#menu-categories button');
-    categoryButtons.forEach(button => {
-        if (button.getAttribute('data-category') === category) {
-            button.classList.add('active');
-        } else {
-            button.classList.remove('active');
-        }
-    });
-}
-
 function submitOrder() {
     if (currentTable !== null) {
         // Mark all items as submitted
@@ -124,7 +106,6 @@ function submitOrder() {
         updateTableButtonColor(currentTable);
         updateClearTableButtonVisibility(); // Update clear table button visibility
         saveOrdersToLocalStorage();
-        document.getElementById('clearTableBtn').style.display = 'inline-block'; // Show clear table button
         alert('Order submitted!');
         // Navigate back to table selection
         showTables();
@@ -153,7 +134,6 @@ function updateTableButtonColor(tableNumber) {
     } else {
         tableButton.classList.remove('submitted');
     }
-
 }
 
 // Function to update clear table button visibility
