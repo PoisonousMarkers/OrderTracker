@@ -13,21 +13,10 @@ function saveOrdersToLocalStorage() {
 
 function selectTable(tableNumber) {
     currentTable = tableNumber;
-
-    // Check if there are existing orders for the selected table
-    if (orders[currentTable] && orders[currentTable].length > 0) {
-        // If orders exist, show the menu directly
-        showMenu();
-    } else {
-        // If no orders exist, just update the currentTable and show tables
-        showTables();
-    }
-
-    // Initialize orders if it doesn't exist for the selected table
     if (!orders[currentTable]) {
         orders[currentTable] = [];
     }
-
+    showMenu();
     updateOrderSummary();
     updateTableButtonColor(currentTable);
 }
@@ -57,6 +46,7 @@ function addMenuItem(menuItem) {
     }
 }
 
+
 function removeMenuItem(itemIndex) {
     if (currentTable !== null) {
         if (orders[currentTable][itemIndex].submitted) {
@@ -77,6 +67,7 @@ function removeMenuItem(itemIndex) {
         saveOrdersToLocalStorage();
     }
 }
+
 
 function updateOrderSummary() {
     const summary = document.getElementById('summary');
@@ -101,6 +92,28 @@ function showTables() {
 function showMenu() {
     document.getElementById('page-tables').style.display = 'none';
     document.getElementById('page-menu').style.display = 'block';
+}
+
+function showCategory(category) {
+    // Hide all menu items divs first
+    document.getElementById('menu-items-starters').style.display = 'none';
+    document.getElementById('menu-items-pasta').style.display = 'none';
+    document.getElementById('menu-items-pizza').style.display = 'none';
+    document.getElementById('menu-items-desserts').style.display = 'none';
+    document.getElementById('menu-items-modifiers').style.display = 'none';
+
+    // Show the selected category menu items
+    document.getElementById(`menu-items-${category}`).style.display = 'block';
+
+    // Toggle active class for menu category buttons
+    const categoryButtons = document.querySelectorAll('#menu-categories button');
+    categoryButtons.forEach(button => {
+        if (button.getAttribute('data-category') === category) {
+            button.classList.add('active');
+        } else {
+            button.classList.remove('active');
+        }
+    });
 }
 
 function submitOrder() {
@@ -140,6 +153,35 @@ function updateTableButtonColor(tableNumber) {
     } else {
         tableButton.classList.remove('submitted');
     }
+
+}
+
+// Function to update clear table button visibility
+function updateClearTableButtonVisibility() {
+    const clearTableBtn = document.getElementById('clearTableBtn');
+    if (currentTable !== null && orders[currentTable] && orders[currentTable].length > 0) {
+        clearTableBtn.style.display = 'inline-block'; // Show clear table button
+    } else {
+        clearTableBtn.style.display = 'none'; // Hide clear table button
+    }
+}
+
+function autoEnterFullscreen() {
+    // Check if the app is launched from the home screen on iPad
+    if (navigator.standalone) {
+        enterFullscreen();
+    }
+}
+
+// Fullscreen function
+function enterFullscreen() {
+    if (document.documentElement.requestFullscreen) {
+        document.documentElement.requestFullscreen();
+    } else if (document.documentElement.webkitRequestFullscreen) { /* Safari */
+        document.documentElement.webkitRequestFullscreen();
+    } else if (document.documentElement.msRequestFullscreen) { /* IE11 */
+        document.documentElement.msRequestFullscreen();
+    }
 }
 
 // Load stored orders on page load
@@ -147,5 +189,7 @@ window.onload = function() {
     updateOrderSummary(); // Update summary based on stored orders
 };
 
+// Automatically enter fullscreen on page load if launched from home screen on iPad
+autoEnterFullscreen();
 // Show tables by default
 showTables();
